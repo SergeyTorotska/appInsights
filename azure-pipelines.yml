@@ -43,13 +43,7 @@ stages:
       inputs:
         targetPath: '$(build.ArtifactStagingDirectory)' 
         artifactName: 'drop'
-
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: 'restore'
-        projects: '$(build.ArtifactStagingDirectory)'
-        feedsToUse: 'select'
-
+    
 - stage: Deploy
   jobs:
   - job: DeployJob 
