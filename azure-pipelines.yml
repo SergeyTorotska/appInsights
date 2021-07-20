@@ -54,7 +54,7 @@ stages:
       inputs:
         buildType: 'current'
         downloadType: 'single'
-        downloadPath: '$(Build.ArtifactStagingDirectory)'
+        downloadPath: '$(System.ArtifactsDirectory)'
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
