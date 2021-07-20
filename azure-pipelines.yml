@@ -42,14 +42,14 @@ stages:
         zipAfterPublish: True
 
     - task: CopyFiles@2
-      displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+      displayName: 'Copy Files to: $(build.ArtifactStagingDirectory)'
       inputs:
           SourceFolder: AzureDeploy
-          TargetFolder: '$(build.artifactstagingdirectory)'
+          TargetFolder: '$(build.ArtifactStagingDirectory)'
 
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)' 
+        targetPath: '$(build.ArtifactStagingDirectory)' 
         artifactName: 'drop'
 
 - stage: Deploy
