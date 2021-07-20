@@ -3,7 +3,7 @@ trigger:
 
 pool:
   name: Azure Pipelines
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 variables:
   buildConfiguration: 'Release'
@@ -46,17 +46,6 @@ stages:
         targetPath: '$(Build.ArtifactStagingDirectory)' 
         artifactName: 'netcoreapp'
 
-- stage: 
-  jobs:
-  - job: DownloadJob      
-    steps:
-      - task: DownloadBuildArtifacts@0
-        inputs:
-          buildType: 'current'
-          downloadType: 'single'
-          downloadPath: '$(Build.ArtifactStagingDirectory)'
-          artifactName: 'netcoreapp'
-
 - stage: Deploy
   jobs:
   - job: DeployJob 
@@ -65,6 +54,6 @@ stages:
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'Azure subscription 1 (f016713d-47fd-4917-a2c7-c2805377c59c)'
-        appType: 'webAppLinux'
+        appType: 'webApp'
         WebAppName: 'netw'
-        packageForLinux: '$(Build.ArtifactStagingDirectory)'
+        package: '$(Build.ArtifactStagingDirectory)'
