@@ -25,7 +25,7 @@ stages:
     steps:
     - task: DotNetCoreCLI@2
       inputs:
-        command: build
+        command: 'build'
         projects: '*.csproj'
         arguments: '--configuration $(buildConfiguration)'
       displayName: 'dotnet build $(buildConfiguration)'
@@ -40,12 +40,6 @@ stages:
         publishWebProjects: True
         arguments: '--configuration $(buildConfiguration) --output $(build.ArtifactStagingDirectory)'
         zipAfterPublish: True
-
-    - task: CopyFiles@2
-      inputs:
-        contents: '_buildOutput\**'
-        targetFolder: $(Build.ArtifactStagingDirectory)
-
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(build.ArtifactStagingDirectory)' 
