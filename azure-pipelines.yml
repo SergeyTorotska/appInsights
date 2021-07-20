@@ -54,7 +54,7 @@ stages:
       inputs:
         buildType: 'current'
         downloadType: 'single'
-        downloadPath: '$(System.DefaultWorkingDirectory)'
+        downloadPath: '$(Build.ArtifactStagingDirectory)'
         artifactName: 'drop'
     - task: AzureRmWebAppDeployment@4
       inputs:
@@ -62,4 +62,4 @@ stages:
         azureSubscription: 'Azure subscription 1 (f016713d-47fd-4917-a2c7-c2805377c59c)'
         appType: 'webAppLinux'
         WebAppName: 'netw'
-        packageForLinux: '$(System.DefaultWorkingDirectory)'
+        packageForLinux: '$(Build.ArtifactStagingDirectory)'
