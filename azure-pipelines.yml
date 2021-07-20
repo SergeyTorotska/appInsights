@@ -46,6 +46,17 @@ stages:
         targetPath: '$(Build.ArtifactStagingDirectory)' 
         artifactName: 'netcoreapp'
 
+- stage: 
+  jobs:
+  - job: DownloadJob      
+    steps:
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: 'current'
+          downloadType: 'single'
+          downloadPath: '$(Build.ArtifactStagingDirectory)'
+          artifactName: 'netcoreapp'
+
 - stage: Deploy
   jobs:
   - job: DeployJob 
