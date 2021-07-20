@@ -3,7 +3,7 @@ trigger:
 
 pool:
   name: Azure Pipelines
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
 
 variables:
   buildConfiguration: 'Release'
@@ -54,6 +54,6 @@ stages:
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'Azure subscription 1 (f016713d-47fd-4917-a2c7-c2805377c59c)'
-        appType: 'webApp'
+        appType: 'webAppLinux'
         WebAppName: 'netw'
-        package: '$(Build.ArtifactStagingDirectory)'
+        packageForLinux: '$(Build.ArtifactStagingDirectory)'
