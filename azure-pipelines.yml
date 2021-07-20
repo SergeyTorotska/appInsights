@@ -38,14 +38,14 @@ stages:
       inputs:
         command: publish
         publishWebProjects: True
-        arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        arguments: '--configuration $(buildConfiguration) --output $(build.ArtifactStagingDirectory)'
         zipAfterPublish: True
 
     - task: CopyFiles@2
-      displayName: 'Copy Files to: $(build.artifactstagingdirectory)\AzureDeploy'
+      displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
       inputs:
           SourceFolder: AzureDeploy
-          TargetFolder: '$(build.artifactstagingdirectory)\AzureDeploy'
+          TargetFolder: '$(build.artifactstagingdirectory)'
 
     - task: PublishPipelineArtifact@1
       inputs:
@@ -60,7 +60,7 @@ stages:
       inputs:
         buildType: 'current'
         downloadType: 'single'
-        downloadPath: '$(Build.ArtifactStagingDirectory)'
+        downloadPath: '$(build.ArtifactStagingDirectory)'
         artifactName: 'drop'
     - task: AzureRmWebAppDeployment@4
       inputs:
@@ -68,4 +68,4 @@ stages:
         azureSubscription: 'Azure subscription 1 (f016713d-47fd-4917-a2c7-c2805377c59c)'
         appType: 'webAppLinux'
         WebAppName: 'netw'
-        packageForLinux: '$(Build.ArtifactStagingDirectory)'
+        packageForLinux: '$(build.ArtifactStagingDirectory)'
