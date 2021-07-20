@@ -25,6 +25,7 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
+        projects: '**/*.csproj'
         arguments: '--configuration $(buildConfiguration)'
       displayName: 'dotnet build $(buildConfiguration)'
 
@@ -43,6 +44,12 @@ stages:
         targetPath: '$(build.ArtifactStagingDirectory)' 
         artifactName: 'drop'
 
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'restore'
+        projects: '$(build.ArtifactStagingDirectory)'
+        feedsToUse: 'select'
+
 - stage: Deploy
   jobs:
   - job: DeployJob 
@@ -51,4 +58,4 @@ stages:
       inputs:
         azureSubscription: 'Azure subscription 1 (f016713d-47fd-4917-a2c7-c2805377c59c)'
         AppName: 'netw'
-        package: '$(build.ArtifactStagingDirectory)/drop/s.zip'
+        package: '$(build.ArtifactStagingDirectory)'
