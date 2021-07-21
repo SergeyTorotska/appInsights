@@ -42,15 +42,19 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(build.ArtifactStagingDirectory)' 
+        artifactType: 'pipeline'
         artifactName: 'drop'
     
 - stage: Deploy
   jobs:
+  - deployment: DeployWeb
+    pool:
+      vmImage: 'windows-latest' 
   - job: DeployJob 
     steps:
     - task: AzureWebApp@1
       inputs:
         azureSubscription: 'Azure subscription 1 (f016713d-47fd-4917-a2c7-c2805377c59c)'
         AppName: 'netw'
-        package: .
+        package: '$(build.ArtifactStagingDirectory)'
 
