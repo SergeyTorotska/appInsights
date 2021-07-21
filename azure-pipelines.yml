@@ -7,7 +7,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  project: '*.csproj'
+  project: '/aspnet.csproj'
 
 stages:
 - stage: Install
