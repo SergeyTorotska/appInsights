@@ -24,9 +24,12 @@ stages:
     steps:
     - task: DotNetCoreCLI@2
       inputs:
-        command: restore
-        projects: 'appInsights/*.csproj '
-     
+        command: 'restore'
+        projects: 'appInsights/*.csproj'
+        feedsToUse: 'select'
+        includeNuGetOrg: false
+
+    
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
