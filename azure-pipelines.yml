@@ -7,6 +7,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  project: '**/*.csproj'
 
 stages:
 - stage: Install
@@ -22,19 +23,9 @@ stages:
   jobs:
   - job: BuildJob
     steps:
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: 'restore'
-        projects: '$(build.ArtifactStagingDirectory)'
-        restoreArguments: '--configuration $(buildConfiguration)'
-        feedsToUse: 'select'
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: 'build'
-        projects: '**/*.csproj'
-        arguments: '--configuration $(buildConfiguration)'
+    - script: dotnet build $(project) --configuration $(buildConfiguration)
       displayName: 'dotnet build $(buildConfiguration)'
-
+    
 - stage: 'Publish'          
   jobs:
   - job: PublishJob
