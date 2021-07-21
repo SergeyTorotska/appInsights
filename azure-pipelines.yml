@@ -13,10 +13,11 @@ stages:
   jobs:
   - job: InstallJob
     steps:
-    - task: NuGetInstaller@0
+    - task: NuGetToolInstaller@1
       displayName: 'Use NuGet 4.4.1'
       inputs:
-        nuGetVersion: '4.0.0.2283'
+        versionSpec: 4.4.1
+        checkLatest: true
         
     - task: UseDotNet@2
       displayName: Install .NET Core SDK'
