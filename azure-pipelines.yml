@@ -16,7 +16,8 @@ stages:
     - task: NuGetInstaller@0
       displayName: 'Use NuGet 4.4.1'
       inputs:
-        version: '4.4.1'
+        nuGetVersion: '4.0.0.2283'
+        
     - task: UseDotNet@2
       displayName: Install .NET Core SDK'
       inputs:
