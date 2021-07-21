@@ -24,6 +24,12 @@ stages:
     steps:
     - task: DotNetCoreCLI@2
       inputs:
+        command: 'restore'
+        projects: '$(build.ArtifactStagingDirectory)'
+        restoreArguments: '--configuration $(buildConfiguration)'
+        feedsToUse: 'select'
+    - task: DotNetCoreCLI@2
+      inputs:
         command: 'build'
         projects: '**/*.csproj'
         arguments: '--configuration $(buildConfiguration)'
