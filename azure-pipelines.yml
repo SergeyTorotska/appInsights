@@ -13,12 +13,7 @@ stages:
   jobs:
   - job: InstallJob
     steps:
-    - task: NuGetToolInstaller@1
-      displayName: 'Use NuGet 4.4.1'
-      inputs:
-        versionSpec: 4.4.1
-        checkLatest: true
-        
+         
     - task: UseDotNet@2
       displayName: Install .NET Core SDK'
       inputs:
@@ -28,15 +23,7 @@ stages:
   jobs:
   - job: BuildJob
     steps:
-    - task: NuGetCommand@2
-      displayName: 'NuGet restore'
-      inputs:
-        command: 'restore'
-        project: '**/*.csproj'
-        feedsToUse: 'select'
-        
-
-    
+      
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
