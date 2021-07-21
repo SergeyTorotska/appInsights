@@ -24,6 +24,11 @@ stages:
     steps:
     - task: DotNetCoreCLI@2
       inputs:
+        command: restore
+        projects: 'appInsights/*.csproj '
+     
+    - task: DotNetCoreCLI@2
+      inputs:
         command: 'build'
         projects: '**/*.csproj'
         arguments: '--configuration $(buildConfiguration)'
@@ -36,7 +41,7 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: publish
-        publishWebProjects: True
+        publishWebProjects: false
         arguments: '--configuration $(buildConfiguration) --output $(build.ArtifactStagingDirectory)'
         zipAfterPublish: true
     - task: PublishPipelineArtifact@1
