@@ -13,6 +13,10 @@ stages:
   jobs:
   - job: InstallJob
     steps:
+    - task: NuGetInstaller@0
+      displayName: 'Use NuGet 4.4.1'
+      inputs:
+        versionSpec: 4.4.1
     - task: UseDotNet@2
       displayName: Install .NET Core SDK'
       inputs:
@@ -22,12 +26,13 @@ stages:
   jobs:
   - job: BuildJob
     steps:
-    - task: DotNetCoreCLI@2
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore'
       inputs:
         command: 'restore'
-        projects: '**/*.csproj'
+        project: '**/*.csproj'
         feedsToUse: 'select'
-        includeNuGetOrg: false
+        
 
     
     - task: DotNetCoreCLI@2
@@ -44,7 +49,7 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: publish
-        publishWebProjects: false
+        publishWebProjects: true
         arguments: '--configuration $(buildConfiguration) --output $(build.ArtifactStagingDirectory)'
         zipAfterPublish: true
     - task: PublishPipelineArtifact@1
