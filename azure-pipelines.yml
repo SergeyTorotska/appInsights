@@ -47,10 +47,10 @@ stages:
     
 - stage: Deploy
   jobs:
-  - deployment: DeployWeb
+    
+  - job: DeployJob 
     pool:
       vmImage: 'windows-latest' 
-  - job: DeployJob 
     steps:
     - task: AzureWebApp@1
       inputs:
